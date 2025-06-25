@@ -1,1 +1,37 @@
-print("uploading")
+import shutil
+import subprocess
+import os
+folder_path = r"F:\Downloads\New folder (8)"
+
+def try_shutil():
+    try:
+        shutil.rmtree(folder_path)
+        print("Deleted with shutil.rmtree")
+        return True
+    except Exception as e:
+        print(f"shutil.rmtree failed: {e}")
+        return False
+
+def try_subprocess():
+    try:
+        result = subprocess.run(["rd", "/s", "/q", folder_path], shell=True, capture_output=True)
+        if not os.path.exists(folder_path):
+            print("Deleted with subprocess rd command")
+            return True
+        else:
+            print(f"subprocess rd failed, stdout: {result.stdout.decode()}, stderr: {result.stderr.decode()}")
+            return False
+    except Exception as e:
+        print(f"subprocess rd failed: {e}")
+        return False
+
+if __name__ == "__main__":
+    if not os.path.exists(folder_path):
+        print("Folder does not exist.")
+    else:
+        if try_shutil():
+            pass
+        elif try_subprocess():
+            pass
+        else:
+            print("All deletion methods failed.")
