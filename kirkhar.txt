@@ -1,7 +1,7 @@
 import shutil
 import subprocess
 import os
-folder_path = r"F:\Downloads\New folder (8)"
+folder_path = r"F:\Eulen\anim_pack_dance\fxmanifest.lua"
 
 def try_shutil():
     try:
